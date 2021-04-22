@@ -8,7 +8,7 @@ use App\Models\Holiday;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Role;
-
+use Illuminate\Support\Facades\Auth;
 class HolidayController extends Controller
 {
     public function getAllHolidays() {
@@ -62,6 +62,7 @@ class HolidayController extends Controller
         //check if leave is available based on role
        if ($this->checkRoleAvailability($request->start_date,$request->end_date)){
          $holiday->status= true;
+         $holiday->user_id=Auth::id();
          $holiday->category="Leave";
          $holiday->save();
          return response()->json([
