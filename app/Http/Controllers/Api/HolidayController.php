@@ -62,6 +62,7 @@ class HolidayController extends Controller
         //check if leave is available based on role
        if ($this->checkRoleAvailability($request->start_date,$request->end_date)){
          $holiday->status= true;
+         $holiday->category="Leave";
          $holiday->save();
          return response()->json([
           "message" => "Leave application succesful"
