@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HolidayController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\DepartmentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,12 +20,16 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-Route::get('holidays', 'App\Http\Controllers\Api\HolidayController@getAllHolidays');
-Route::get('holidays/{id}', 'App\Http\Controllers\Api\HolidayController@getHolidayById');
-Route::get('holidays/{start_date}/{end_date}', 'App\Http\Controllers\Api\HolidayController@getHolidayByDate');
-Route::post('holidays', 'App\Http\Controllers\Api\HolidayController@createHoliday');
-Route::delete('holidays/{id}','App\Http\Controllers\Api\HolidayController@deleteHoliday');
+Route::get('holidays', [HolidayController::class, 'getAllHolidays']);
+Route::get('holidays/{id}', [HolidayController::class, 'getHolidayById']);
+Route::get('holidays/{start_date}/{end_date}', [HolidayController::class, 'getHolidayByDate']);
+Route::post('holidays', [HolidayController::class, 'createHoliday']);
+Route::delete('holidays/{id}',[HolidayController::class, 'deleteHoliday']);
   });
-  Route::get('all/users', 'App\Http\Controllers\Api\HolidayController@all_user');
-Route::post('/login', 'App\Http\Controllers\Api\HolidayController@login');
-Route::post('/logout', 'App\Http\Controllers\Api\HolidayController@logout');
+  Route::get('all/depts', [DepartmentController::class, 'getAllDepartments']);
+
+  Route::get('all/roles', [RoleController::class, 'getAllRoles']);
+  Route::get('all/users', [AuthController::class, 'all_user']);
+ // Route::get('all/users', 'App\Http\Controllers\Api\HolidayController@all_user');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);

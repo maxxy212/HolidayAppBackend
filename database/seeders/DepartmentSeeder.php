@@ -16,11 +16,14 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         DB::table('departments')->insert([
+            'id'=>1,
             'name' => 'Engineering'
         ]);
         DB::table('departments')->insert([
+            'id'=>2,
             'name' => 'Construction'
         ]);DB::table('departments')->insert([
+            'id'=>3,
             'name' => 'HR'
         ]);
     }
