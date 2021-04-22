@@ -23,5 +23,6 @@ Route::get('holidays/{start_date}/{end_date}', 'Api\HolidayController@getHoliday
 Route::post('holidays', 'Api\HolidayController@createHoliday');
 Route::delete('holidays/{id}','Api\HolidayController@deleteHoliday');
   });
+  Route::get('all/users', 'Api\AuthController@all_user');
 Route::post('/login', 'Api\AuthController@login');
 Route::post('/logout', 'Api\AuthController@logout');
