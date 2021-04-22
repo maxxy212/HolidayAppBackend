@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-Route::get('holidays', 'Api\HolidayController@getAllHolidays');
+Route::get('holidays', 'HolidayController@getAllHolidays');
 Route::get('holidays/{id}', 'Api\HolidayController@getHolidayById');
 Route::get('holidays/{start_date}/{end_date}', 'Api\HolidayController@getHolidayByDate');
 Route::post('holidays', 'Api\HolidayController@createHoliday');
