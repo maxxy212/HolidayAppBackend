@@ -33,7 +33,7 @@ class AuthController extends Controller
       }
 
       public function all_user() {
-        $users = User::get()->toJson(JSON_PRETTY_PRINT);
-        return response($users, 200);
+        $users = User::get();
+        return response()->json($users);
       }
 }
