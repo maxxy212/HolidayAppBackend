@@ -31,5 +31,5 @@ Route::delete('holidays/{id}',[HolidayController::class, 'deleteHoliday']);
   Route::get('all/roles', [RoleController::class, 'getAllRoles']);
   Route::get('all/users', [AuthController::class, 'all_user']);
  // Route::get('all/users', 'App\Http\Controllers\Api\HolidayController@all_user');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
