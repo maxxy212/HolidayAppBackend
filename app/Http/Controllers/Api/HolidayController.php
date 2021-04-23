@@ -102,10 +102,8 @@ class HolidayController extends Controller
 
 
       private function checkRoleAvailability($start_date,$end_date){
-       //return 
-       dd(Auth::user()->role_id);
-      dd(Role::find(Auth::user()->role_id())->name);
-       //->name=='Junior Member' ? true: $this->checkDepartmentRoleAvailability($start_date,$end_date);
+       return (Role::find(Auth::user()->role_id)->name=='Junior Member' ? true: $this->checkDepartmentRoleAvailability($start_date,$end_date);
+       //;
       }
 
 
