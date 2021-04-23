@@ -109,7 +109,7 @@ class HolidayController extends Controller
 
 
       private function checkDepartmentRoleAvailability($start_date,$end_date){
-         if(Str::contains(Auth::user()->role()->name, 'Head')){
+         if(Str::contains(Role::find(Auth::user()->role_id)->name, 'Head')){
            $role=Role::where('name', 'LIKE', '%'.'Head'.'%')->pluck('id');
           $depts_users=User::where('dept_id',Auth::user()->dept_id)->whereIn('role_id',$role)->pluck('id');
          $users_on_leave= Holiday::whereBetween('start_date', [$start_date,$end_date])->whereBetween('end_date', [$start_date,$end_date])->whereIn('user_id',$depts_users)->count();
