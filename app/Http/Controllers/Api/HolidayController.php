@@ -95,7 +95,7 @@ class HolidayController extends Controller
        return Auth::user()->remaining_leaves > 0 ? true:false;
       }
       private function checkLeavePopulation($start_date,$end_date){
-        $all_dept=User::where('department_id',Auth::user()->department_id)->lists('id')->toArray();
+        $all_dept=User::where('department_id',Auth::user()->department_id)->pluck('id');
         $leave_count= Holiday::whereIn('user_id',$all_dept)->whereBetween('start_date', [$start_date,$end_date])->whereBetween('end_date', [$start_date,$end_date])->count();
         return $leave_count>($all_dept/2)?false:true;
       }
@@ -108,14 +108,14 @@ class HolidayController extends Controller
 
       private function checkDepartmentRoleAvailability($start_date,$end_date){
          if(Str::contains(Auth::user()->role()->name, 'Head')){
-           $role=Role::where('name', 'LIKE', '%'.'Head'.'%')->lists('id')->toArray();
-          $depts_users=User::where('dept_id',Auth::user()->dept_id)->whereIn('role_id',$role)->lists('id')->toArray();
+           $role=Role::where('name', 'LIKE', '%'.'Head'.'%')->pluck('id');
+          $depts_users=User::where('dept_id',Auth::user()->dept_id)->whereIn('role_id',$role)->pluck('id');
          $users_on_leave= Holiday::whereBetween('start_date', [$start_date,$end_date])->whereBetween('end_date', [$start_date,$end_date])->whereIn('user_id',$depts_users)->count();
        return  $users_on_leave>0?false:true;
         }
         else{
-          $role=Role::where('name', 'Manager')->orWhere('name', 'Senior Member')->lists('id')->toArray();
-          $depts_users=User::where('dept_id',Auth::user()->dept_id)->whereIn('role_id',$role)->lists('id')->toArray();
+          $role=Role::where('name', 'Manager')->orWhere('name', 'Senior Member')->pluck('id');
+          $depts_users=User::where('dept_id',Auth::user()->dept_id)->whereIn('role_id',$role)->pluck('id');
          $users_on_leave= Holiday::whereBetween('start_date', [$start_date,$end_date])->whereBetween('end_date', [$start_date,$end_date])->whereIn('user_id',$depts_users)->count();
         return $users_on_leave>0?false:true;
         }
