@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Department;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 class HolidayController extends Controller
 {
     public function getAllHolidays() {
