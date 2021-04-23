@@ -97,7 +97,7 @@ class HolidayController extends Controller
       private function checkLeavePopulation($start_date,$end_date){
         $all_dept=User::where('department_id',Auth::user()->department_id)->pluck('id');
         $leave_count= Holiday::whereIn('user_id',$all_dept)->whereBetween('start_date', [$start_date,$end_date])->whereBetween('end_date', [$start_date,$end_date])->count();
-        return $leave_count>($all_dept/2)?false:true;
+        return $leave_count>(count($all_dept)/2)?false:true;
       }
 
 
